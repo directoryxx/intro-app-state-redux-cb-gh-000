@@ -30,8 +30,8 @@ Here's an example of a React component whose state changes whenever its child el
 class myCheckBox extends React.Component {
 
   handleCheckboxClick(){
-    var divChangeColor = this.state.checked ? "red" : "green"
-    this.setState({checked: !this.state.checked, color: divChangeColor})
+    var divColor = this.state.checked ? "red" : "green"
+    this.setState({checked: !this.state.checked, color: divColor})
   }
 
   render(){
@@ -65,7 +65,6 @@ To understand how Redux manages state, it's important to understand the principl
 
 Redux stores the state of our entire application in a **single JavaScript object**. This is a unique approach to the Flux design pattern in that other libraries might recommend using a different store for each model. Having a single store with a single state object means that Redux provides a single source of truth for everything we need in our application: both our data and our UI state. If we link our views to our application state, it means that our views will always be in-sync with our application state. With Redux, there will never be conflicting information about what the state of our application should be. There is only one place where this information about our data and our UI is stored--on application state.
 
-
 2. State is Read-Only
 
 If you've been reading closely, you're probably wondering how this could possibly be true. If state is read-only, how can we update it with new information like UI changes or data updates?
@@ -73,7 +72,6 @@ If you've been reading closely, you're probably wondering how this could possibl
 The answer is that changes to state are made, but we don't do it by updating the state object directly. Instead, we create a **new** state object and add the values we want to add or change, plus the old values from previous state that we want to copy over unchanged. Any time that we need our application state to change, we create a new object that reflects the current, updated state of our application and leave the old object untouched.
 
 The benefit of this approach is that it makes it easier for us to understand when and why our application state has changed. We can create a function that writes our current application state to a log file and call this function whenever an action is dispatched. This way, we have a record of what our application state was when the action was triggered, making it easy to track down bugs.
-
 
 3. State Changes are Made with Pure Functions
 
@@ -86,7 +84,7 @@ Another Redux principle is that the reducer functions, which handle changes to a
 
 ### Accessing State
 
-We can access our application's state object by calling the `getState()` method on our Redux store. 
+We can access our application's state object by calling the `getState()` method on our Redux store.
 
 ```
 import { createStore } from 'redux';
