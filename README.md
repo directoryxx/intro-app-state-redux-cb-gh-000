@@ -61,11 +61,11 @@ To create this view, we might iterate over the list of students in the class, di
 
 To understand how Redux manages state, it's important to understand the principles behind it and why they matter.
 
-1. Single Source of Truth
+### 1. Single Source of Truth
 
 Redux stores the state of our entire application in a **single JavaScript object**. This is a unique approach to the Flux design pattern in that other libraries might recommend using a different store for each model. Having a single store with a single state object means that Redux provides a single source of truth for everything we need in our application: both our data and our UI state. If we link our views to our application state, it means that our views will always be in-sync with our application state. With Redux, there will never be conflicting information about what the state of our application should be. There is only one place where this information about our data and our UI is stored--on application state.
 
-2. State is Read-Only
+### 2. State is Read-Only
 
 If you've been reading closely, you're probably wondering how this could possibly be true. If state is read-only, how can we update it with new information like UI changes or data updates?
 
@@ -73,13 +73,13 @@ The answer is that changes to state are made, but we don't do it by updating the
 
 The benefit of this approach is that it makes it easier for us to understand when and why our application state has changed. We can create a function that writes our current application state to a log file and call this function whenever an action is dispatched. This way, we have a record of what our application state was when the action was triggered, making it easy to track down bugs.
 
-3. State Changes are Made with Pure Functions
+### 3. State Changes are Made with Pure Functions
 
 Another Redux principle is that the reducer functions, which handle changes to application state, are pure functions. To be considered "pure," a function has to meet two criteria:
 
-1. It will always return the same value if given the same argument(s). The only thing that affects the return value of a pure function are the arguments it is passed. This means anything external to the function is irrelevant. For example, a function whose return value is affected by the time or day, day of the week, or application data (if a user is logged in, number of model records, etc.) is not a pure function. The only thing that affects a pure function's return value is its arguments.
++ It will always return the same value if given the same argument(s). The only thing that affects the return value of a pure function are the arguments it is passed. This means anything external to the function is irrelevant. For example, a function whose return value is affected by the time or day, day of the week, or application data (if a user is logged in, number of model records, etc.) is not a pure function. The only thing that affects a pure function's return value is its arguments.
 
-2. It has no side effects. All a pure function does is take action on its own internal information and return a value. Pure functions do not take actions that have external effects in your application like saving data in a database, fetching data over the network, or modifying the values of other objects. In Redux, reducers are pure functions because they never change state--they only create a new state object and update that object by copying-in existing values and modifying state based on instructions in the action passed in.
++ It has no side effects. All a pure function does is take action on its own internal information and return a value. Pure functions do not take actions that have external effects in your application like saving data in a database, fetching data over the network, or modifying the values of other objects. In Redux, reducers are pure functions because they never change state--they only create a new state object and update that object by copying-in existing values and modifying state based on instructions in the action passed in.
 
 
 ### Accessing State
