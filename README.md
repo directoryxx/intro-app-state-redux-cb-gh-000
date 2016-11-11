@@ -30,7 +30,7 @@ Here's an example of a React component whose state changes whenever its child el
 class myCheckBox extends React.Component {
 
   handleCheckboxClick(){
-    var divColor = this.state.checked ? "red" : "green"
+    let divColor = this.state.checked ? "red" : "green"
     this.setState({checked: !this.state.checked, color: divColor})
   }
 
