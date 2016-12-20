@@ -26,20 +26,34 @@ In React, having a component that needs to have state is also a clue that it sho
 
 Here's an example of a React component whose state changes whenever its child element (a checkbox) is clicked.
 
-```
-class myCheckBox extends React.Component {
+```javascript
+import React, { Component } from 'react' 
 
+class myCheckBox extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+      isChecked: false 
+    }
+  }
+  
   handleCheckboxClick(){
-    let divColor = this.state.checked ? "red" : "green"
-    this.setState({checked: !this.state.checked, color: divColor})
+    const divColor = this.state.isChecked ? "red" : "green"
+    this.setState({
+      isChecked: !this.state.isChecked, color: divColor
+    })
   }
 
   render(){
     return (
       <div style={{color: this.state.color}}>
-        <input type="checkbox" onClick={this.handleCheckboxClick.bind(this)} />
+        <input 
+          type="checkbox" 
+          onClick={this.handleCheckboxClick.bind(this)}
+          checked={this.state.isChecked} />
       </div>
-      )
+    )
   }
 }
 
@@ -50,11 +64,16 @@ When a user clicks the checkbox, this triggers the `handleCheckBoxClick` functio
 
 ### That's Great, but What Does it Have to Do with Redux?
 
-State in Redux is similar to state in React but at a larger scale. While state in React is focused on an individual component and its children, **Redux holds the state for our whole application**. Redux state refers to both the data that our application needs to use in our layout **PLUS** the logic around how that data is displayed. For example, let's say that we're using our checkbox React component in an app used at the Flatiron School that keeps track of student progress. We need to keep track the students in the class and figure out if any of them haven't gotten approval from an instructor for their app idea.
+State in Redux is similar to state in React but at a larger scale. While state in React is focused on an individual component and its children, **Redux holds the state for our whole application**. Redux state refers to both the data that our application needs to use in our layout **PLUS** the logic around how that data is displayed. For example, let's say that we're using our checkbox React component in an app used at the Flatiron School that keeps track of student progress. We need to keep track of the students that have graduated.
 
-In this application, we'll want to create a view that displays the names of all the students in the class and render our checkbox component next to each name. We'd want each checkbox element to somehow be connected to the student whose name is displayed next to it so that when we click the checkbox, this will change the checkbox element's color AND to update our application data so that the student record now reflects that the student has met with an instructor.
+In this application, we want to create a view that displays the names of all the students and render our checkbox component next to each name. We want each checkbox element to somehow be connected to the student whose name is displayed next to it, so that when we click the checkbox, this will change the checkbox element's color and update our application data, so that the student record now reflects that the student has graduated.
 
-To create this view, we might iterate over the list of students in the class, displaying their names and a checkbox next to each. The instructor can click the checkbox to indicate that the student has met with them. In this case, our application state would keep track of both: 1. the information about all the students, and 2. which students' checkboxes have been checked in the view. In this way, Redux keeps track of both data (which students have met with an instructor) and the view logic (which checkboxes are green). This is what makes Redux so useful--it gives us a container to hold all the information that our application needs.
+To create this view, we might iterate over the list of students, displaying their names and a checkbox next to each. The instructor can then click the checkbox to indicate that the student has graduated. In this case, our application state would keep track of both: 
+
+  * the information about all the students
+  * which students' checkboxes have been checked in the view. 
+  
+This way Redux can keep track of both data (which students have met with an instructor) and the view logic (which checkboxes are green). This is what makes Redux so useful--it gives us a container to hold all the information that our application needs.
 
 
 ### Redux Principles
